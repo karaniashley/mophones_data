@@ -1,0 +1,18 @@
+version: 2
+models:
+  - name: NSP_DATA_VIEW
+    description: NPS summary by days-past-due bucket, sale_date, and balance_due_status. Ensures consistent linkage between credit metrics (DPD, balance_due_status) and NPS for reporting.
+    columns:
+      - name: sale_date
+      - name: dpd_bucket
+        description: Current, 1-30, 31-60, 61-90, 90+
+        tests:
+          - accepted_values:
+              values: ['Current', '1-30', '31-60', '61-90', '90+']
+      - name: balance_due_status
+      - name: respondent_count
+        description: Number of NPS respondents in the segment
+        tests: [not_null]
+      - name: avg_nps
+        description: Average NPS score (0–10), 2 decimal places
+        tests: [not_null]

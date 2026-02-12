@@ -1,0 +1,34 @@
+version: 2
+models:
+  - name: credit_enriched
+    description: Credit snapshots joined with DOB (age/age_range), income band, and gender. Single source of truth for credit + demographics; feeds NPS linkage in marts.
+    columns:
+      - name: loan_id
+        tests: [not_null]
+      - name: snapshot_date
+        tests: [not_null]
+      - name: sale_date
+      - name: Reporting_Period
+        description: Label e.g. End of Q3, Start of January
+      - name: total_paid
+      - name: balance
+      - name: arrears
+      - name: days_past_due
+      - name: balance_due_status
+      - name: account_status_l1
+      - name: account_status_l2
+      - name: dob
+      - name: age_at_snapshot
+        description: Age at snapshot date (years, 1 decimal)
+      - name: age_range
+        description: 18–25, 26–35, 36–45, 46–55, Above 55, Uncategorized
+        tests:
+          - accepted_values:
+              values: ['18–25', '26–35', '36–45', '46–55', 'Above 55', 'Uncategorized']
+      - name: avg_income
+      - name: income_range
+      - name: gender
+        description: Female, Male, Uncategorized
+        tests:
+          - accepted_values:
+              values: ['Female', 'Male', 'Uncategorized']

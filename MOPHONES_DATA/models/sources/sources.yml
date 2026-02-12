@@ -1,0 +1,64 @@
+# Raw / source tables in BigQuery (mophones dataset).
+# Sample upstream is in seeds/; production sources are loaded from CSV/ETL.
+# Run staging → intermediate → marts in that order.
+version: 2
+sources:
+  - name: mophones
+    description: MoPhones raw data in BigQuery dataset mophones. Upstream feeds credit snapshots, DOB, income, gender, NPS.
+    tables:
+      # Credit snapshots by period (one table per snapshot date)
+      - name: Credit_Data_30_09_2025
+        description: Credit snapshot as of 2025-09-30
+        columns:
+          - name: loan_id
+            description: Unique loan identifier
+          - name: date
+            description: Snapshot date
+          - name: total_paid
+          - name: total_due_today
+          - name: balance
+          - name: days_past_due
+          - name: arrears
+          - name: balance_due_status
+          - name: account_status_l1
+          - name: account_status_l2
+          - name: sale_date
+          - name: CREDIT_EXPIRY
+      - name: Credit_Data_30_06_2025
+        description: Credit snapshot as of 2025-06-30
+      - name: Credit_Data_30_12_2025
+        description: Credit snapshot as of 2025-12-30
+      - name: CreditData_01_01_2025
+        description: Credit snapshot as of 2025-01-01
+      - name: CreditData_30_03_2025
+        description: Credit snapshot as of 2025-03-30
+      # Customer / demographic sources
+      - name: mophones_dob
+        description: Date of birth by loan (source: MOPHONES_DOB.csv)
+        columns:
+          - name: "Loan Id "
+            description: Loan identifier (trailing space in source)
+          - name: date_of_birth
+            description: DOB; parse YYYY-MM-DD for valid dates
+      - name: income_level
+        description: Income by loan (source: INCOME_LEVEL.csv)
+        columns:
+          - name: "Loan Id"
+          - name: duration
+          - name: received
+          - name: "Persons Received From Total"
+          - name: "Banks Received"
+          - name: "Paybills Received Others"
+      - name: mophones_gender
+        description: Gender by loan (source: MOPHONES_GENDER.csv)
+        columns:
+          - name: "Loan Id"
+          - name: gender
+      - name: mophones_nps_data
+        description: NPS survey responses (source: MOPHONES_NPS_DATA.csv). Link to credit via loan_id.
+        columns:
+          - name: loan_id
+            description: Links NPS to credit_enriched for consistent credit–NPS analysis
+          - name: "Using a scale from 0 not likely to 10 very likely how likely are you to recommend MoPhones to friends or family"
+            description: NPS score 0–10 (BQ column name may be normalized with underscores)
+    # Optional: add source freshness or data tests per table

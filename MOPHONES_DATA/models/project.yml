@@ -1,0 +1,21 @@
+# MoPhones SQL project (dbt-like layout, no dbt CLI).
+# BigQuery dataset: mophones
+name: mophones_models
+version: "1.0.0"
+config:
+  dataset: mophones
+  # Run order: staging → intermediate → marts
+  run_order:
+    - staging
+    - intermediate
+    - marts
+
+layers:
+  sources:
+    description: Raw tables in BigQuery (loaded from CSV / ETL). See sources/sources.yml.
+  staging:
+    description: First-layer views; clean and align raw data (credit_snapshots, dob_per_loan, income_with_bands).
+  intermediate:
+    description: Join staging + sources into business entities (e.g. credit_enriched).
+  marts:
+    description: Analytics-ready views for reporting and dashboards (e.g. NSP_DATA_VIEW).

@@ -1,0 +1,8 @@
+# Run these SQL files in BigQuery in this order (so dependencies exist).
+# Either paste each file into BigQuery console or: bq query --use_legacy_sql=false < file.sql
+
+1. staging/credit_snapshots.sql
+2. staging/dob_per_loan.sql
+3. staging/income_with_bands.sql
+4. intermediate/credit_enriched.sql
+5. marts/nsp_data_view.sql
