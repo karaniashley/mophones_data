@@ -1,6 +1,4 @@
-# dbt profile for MoPhones (BigQuery).
-# Copy to ~/.dbt/profiles.yml as profiles.yml and set your project/dataset.
-# Do not commit profiles.yml if it contains credentials.
+
 mophones_data:
   target: dev
   outputs:
@@ -16,3 +14,4 @@ mophones_data:
       project: your-gcp-project
       dataset: mophones
       threads: 4
+
