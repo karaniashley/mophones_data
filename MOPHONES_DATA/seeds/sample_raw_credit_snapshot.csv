@@ -1,0 +1,6 @@
+loan_id,date,total_paid,total_due_today,balance,days_past_due,arrears,balance_due_status,account_status_l1,account_status_l2,sale_date,credit_expiry
+recSample001,2025-01-01,15000,16000,20000,0,0,up to date,Existing Active,Active,2024-06-01,2025-12-31
+recSample002,2025-01-01,8000,12000,40000,15,1500,Arrears,Existing Active,Active,2024-08-15,2025-11-30
+recSample003,2025-01-01,52999,52999,0,0,0,up to date,Paid Off Cash,Paid Off,2024-12-10,2024-12-17
+recSample004,2025-03-31,20000,25000,35000,45,3500,Arrears,Inactive 01-07,Inactive,2024-09-01,2025-09-30
+recSample005,2025-06-30,0,50000,50000,90,5000,Arrears,Write Off,PAR 30,2024-07-01,2025-06-30

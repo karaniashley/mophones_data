@@ -1,0 +1,47 @@
+version: 2
+models:
+  - name: credit_snapshots
+    description: Union of credit snapshot tables (quarterly/monthly). One row per loan per snapshot date. Supports ongoing collections and credit analysis.
+    columns:
+      - name: loan_id
+        description: Unique loan identifier
+        tests: [not_null]
+      - name: snapshot_date
+        description: Date of the snapshot (from source date)
+        tests: [not_null]
+      - name: total_paid
+      - name: total_due_today
+      - name: balance
+      - name: days_past_due
+      - name: arrears
+      - name: balance_due_status
+        tests:
+          - accepted_values:
+              values: ['up to date', 'Arrears', 'Current', 'Overdue']
+              quote: false
+      - name: account_status_l1
+      - name: account_status_l2
+      - name: sale_date
+      - name: CREDIT_EXPIRY
+  - name: dob_per_loan
+    description: One row per loan with earliest parsed date of birth (YYYY-MM-DD only). Used to enrich credit with age.
+    columns:
+      - name: loan_id
+        description: From source Loan Id (trailing space)
+        tests: [unique, not_null]
+      - name: dob
+        description: Parsed date of birth; NULL if no valid format
+  - name: income_with_bands
+    description: Per-loan aggregated income and income band (e.g. 5,000–9,999). Used for credit segmentation.
+    columns:
+      - name: loan_id
+        tests: [unique, not_null]
+      - name: duration_months
+      - name: total_income
+      - name: avg_income
+        description: total_income / duration_months
+      - name: income_range
+        description: Band label (Below 5,000 through 150,000 and above)
+        tests:
+          - accepted_values:
+              values: ['Below 5,000', '5,000–9,999', '10,000–19,999', '20,000–29,999', '30,000–49,999', '50,000–99,999', '100,000–149,999', '150,000 and above']
