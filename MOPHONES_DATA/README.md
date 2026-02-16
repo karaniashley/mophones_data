@@ -7,13 +7,6 @@ This repository contains a **dbt-style project** that structures MoPhones data t
 
 It includes **sample raw data**, **models**, **tests**, **macros**, and **documentation** suitable for a submission and for use with or without the dbt CLI.
 
----
-
-## GitHub repository
-
-**Submission:** A link to the GitHub repository containing this dbt project should be provided as:
-
-`https://github.com/<your-org>/MOPHONES_DATA`
 
 Contents include: **sample raw data**, **models**, **tests**, **macros**, and **documentation** as described below.
 
@@ -104,6 +97,6 @@ Run the SQL files in BigQuery in the order in `models/run_order.txt`:
 
 ## Submission checklist
 
-- [ ] **GitHub repo link** provided (e.g. `https://github.com/<org>/MOPHONES_DATA`).
 - [ ] Repo contains: **sample raw data** (`seeds/`), **models** (staging, intermediate, marts), **tests** (schema + singular), **macros**, and **documentation** (README, ASSUMPTIONS, lineage).
 - [ ] Design supports **collections/credit analysis** and **consistent credit–NPS linkage** as described above.
+
